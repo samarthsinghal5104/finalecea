@@ -1,0 +1,147 @@
+{% load static %}
+{% load blog_extras %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <script type="text/javascript" src="{% static 'blog/gallery.babel' %}"></script> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'blog/gallery.css' %}"> -->
+    {% block stylesheet %}{% endblock %}
+	{% if title %}
+		<title>ECEA-{{ title }}</title>
+	{% else %}
+		<title>ECEA</title>
+	{% endif %}
+</head>
+<body >
+
+	<header class="site-header ">
+	  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+	    <div class="container">
+	      <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">ECE-Association</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse" id="navbarToggle">
+	        <div class="navbar-nav mr-auto">
+	          <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+	          <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+	        </div>
+	        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="{% url 'post-home'%}">Posts</a>
+            <a class="nav-item nav-link" href="{% url 'event-home'%}">Events</a>
+            <a class="nav-item nav-link" href="{% url 'group-members' %}">Team</a>
+
+	          {% if user.is_authenticated %}
+	          	{% if user|has_group:"Members Only" %}
+	          		<a class="nav-item nav-link" href="{% url 'event-create'%}">New Event</a>
+	          	{% endif %}
+	            <a class="nav-item nav-link" href="{% url 'post-create'%}">Post Something!</a>
+	            <a class="nav-item nav-link" href="{% url 'profile'%}">Profile</a>
+	          	<a class="nav-item nav-link" href="{% url 'logout'%}">Logout</a>
+	          {% else %}
+		          <a class="nav-item nav-link" href="{% url 'login'%}">Login</a>
+		          <a class="nav-item nav-link" href="{% url 'register'%}">Register</a>
+		      {% endif %}
+	        </div>
+	      </div>
+	    </div>
+	  </nav>
+	</header>
+  <!-- <header class="s-header">
+        <div class="header-logo">
+            <a class="site-logo" href="index.html">
+                <div style="float:left;">
+                    <img class="header-logo-img" src="{% static 'images/favicon.png' %}" alt="Homepage" align="left" />
+                </div>
+                <div style="float:left;">
+                    <span class="header-logo-text">Innovation Garage</span>
+                </div>
+            </a>
+        </div>
+        <nav class="header-nav">
+
+            <a href="#0" class="header-nav__close" title="close"><span>Close</span></a>
+
+            <div class="header-nav__content">
+                <h3>Navigation</h3>
+
+                <ul class="header-nav__list">
+                    <li class="current"><a class="smoothscroll"  href="{% url 'blog-home' %}" title="home">Home</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'blog-about' %}" title="about">About</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'post-home'%}" title="works">Posts</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'event-home'%}" title="works">Events</a></li>
+                    <li><a class="smoothscroll"  href="{% url 'group-members' %}" title="works">Team</a></li>
+                    {% if user.is_authenticated %}
+        	          	{% if user|has_group:"Members Only" %}
+        	          		<li><a class="nav-item nav-link" href="{% url 'event-create'%}">New Event</a></li>
+        	          	{% endif %}
+        	            <li><a class="smoothscroll" href="{% url 'post-create'%}">Post Something!</a></li>
+        	            <li><a class="smoothscroll" href="{% url 'profile'%}">Profile</a></li>
+        	          	<li><a class="smoothscroll" href="{% url 'logout'%}">Logout</a></li>
+        	          {% else %}
+        		          <li><a class="smoothscroll" href="{% url 'login'%}">Login</a></li>
+        		          <li><a class="smoothscroll" href="{% url 'register'%}">Register</a></li>
+        		      {% endif %}
+                </ul>
+
+
+                <ul class="header-nav__social">
+                    <li>
+                        <a href="https://www.facebook.com/TheInnovationGarage/"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://ignitw.wordpress.com/"><i class="fa fa-wordpress"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/ig_nitw/"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="mailto:ig-nitw@student.nitw.ac.in"><i class="fa fa-envelope"></i></a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+
+         <a class="header-menu-toggle" href="#0">
+            <span class="header-menu-text">Menu</span>
+            <span class="header-menu-icon"></span>
+        </a>
+
+    </header> -->
+
+{% block content %}{% endblock %}
+
+
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/smoothscroll.js"></script>
+    <script type="text/javascript" src="{% static 'blog/pace.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/mordernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/jquery.js' %}"></script>
+
+
+    {% block script %}{% endblock %}
+
+</body>
+<!-- <div class="social">
+  <a href="https://www.facebook.com/ECEANITW/"><img src="{% static 'blog/facebook_logo.svg' %}" alt="facebook"></a>
+  <a href="https://www.instagram.com/nitw.ecea/"><img src="{% static 'blog/instagram_logo.svg' %}" alt="facebook"></a>
+
+</div> -->
+</html>
